@@ -3,11 +3,10 @@
   hosts: all
   connection: local
   vars:
-    sg_id: sg-076ec9ad23dab2b28
+    sg_id: sg-06264c970c7d1ae80
     ami_id: ami-0220d79f3f480ecf5
-    domain_name: daws88s.online
+    domain_name: gbdaws88s.online
     env: dev
-    action: create
     instances:
     - mongodb
     - catalogue
