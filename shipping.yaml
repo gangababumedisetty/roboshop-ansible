@@ -56,7 +56,7 @@
     
 
   - name: create systemctl service
-    anailble.builtin.template:
+    ansible.builtin.template:
      src: shipping.service
      dest: /etc/systemd/system/shipping.service
 
