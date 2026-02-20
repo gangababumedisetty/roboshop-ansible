@@ -41,7 +41,7 @@
       dest: /tmp/user.zip
 
   - name: unarchieve user
-    anailble.builtin.unarchieve:
+    ansilble.builtin.unarchieve:
       src: /tmp/user.zip
       dest: /app
       remote_src: yes
