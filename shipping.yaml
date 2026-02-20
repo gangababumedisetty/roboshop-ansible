@@ -15,7 +15,7 @@
      name: roboshop
      system: true
      home: /app
-     shee: /sbin.nologin
+     shell: /sbin.nologin
      comment: "Roboshop system user"
 
   
