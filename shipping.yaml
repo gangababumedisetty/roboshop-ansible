@@ -16,6 +16,8 @@
      system: true
      home: /app
      shee: /sbin.nologin
+     comment: "Roboshop system user"
+
   
   - name: delete app directotry
     ansible.builtin.file:
