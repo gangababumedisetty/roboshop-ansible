@@ -2,14 +2,14 @@
   hosts: cart
   become: yes
   tasks:
-  - name: enable nodejs
+  - name: enable nodejs 20
     ansible.builtin.command: dnf module enable nodejs:20 -y
-  
+
   - name: install nodejs
     ansible.builtin.dnf:
-     name: nodejs
-     state: present
-  
+      name: nodejs
+      state: present
+
   - name: create system user roboshop
     ansible.builtin.user:
       name: roboshop
@@ -17,52 +17,49 @@
       home: /app
       shell: /sbin/nologin
       comment: "Roboshop system user"
-
+  
   - name: delete app directory
     ansible.builtin.file:
-     path: /app
-     state: absent
+      path: /app
+      state: absent
 
-  - name: created app directory
+  - name: create app directory
     ansible.builtin.file:
-     path: /app
-     state: directory
+      path: /app
+      state: directory
 
   - name: delete cart zip file
     ansible.builtin.file:
-     path: /tmp/cart.zip
-     state: absent
+      path: /tmp/cart.zip
+      state: absent
 
   - name: download cart
     ansible.builtin.get_url:
-     url:  https://roboshop-artifacts.s3.amazonaws.com/cart-v3.zip 
-     dest: /tmp/cart.zip
+      url: https://roboshop-artifacts.s3.amazonaws.com/cart-v3.zip 
+      dest: /tmp/cart.zip
 
   - name: unarchieve cart
     ansible.builtin.unarchive:
-     src: /tmp/cart.zip
-     dest: /app
-     remote_src: yes
-  
+      src: /tmp/cart.zip
+      dest: /app
+      remote_src: yes
+
   - name: install dependencies
     community.general.npm:
-     path: /app
-    
+      path: /app
+
   - name: copy cart service
     ansible.builtin.template:
       src: cart.service
       dest: /etc/systemd/system/cart.service
-
+  
   - name: daemon reload
     ansible.builtin.systemd_service:
       daemon_reload: true
-   
+
   - name: start cart
     ansible.builtin.service:
       name: cart
       state: restarted
-      enable: yes
-
-      
-    
+      enabled: yes
 
